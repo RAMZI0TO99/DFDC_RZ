@@ -9,7 +9,7 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
 
-app = FastAPI(title="AuditMind Deepfake API")
+app = FastAPI(title="DFDC_RZ Deepfake API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -59,7 +59,7 @@ MODEL_PATH = "best_dfdc_model_v2.pth"
 if os.path.exists(MODEL_PATH):
     model.load_state_dict(torch.load(MODEL_PATH, map_location=device, weights_only=True))
     model.eval()
-    print("✅ AuditMind Model Loaded Successfully!")
+    print("✅ DFDC_RZ Model Loaded Successfully!")
 else:
     print("⚠️ Warning: Model weights not found. Waiting for best_deepfake_model.pth")
 
