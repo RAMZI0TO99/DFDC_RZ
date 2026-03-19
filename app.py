@@ -7,7 +7,7 @@ import numpy as np
 import timm
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 
 app = FastAPI(title="AuditMind Deepfake API")
 
@@ -128,4 +128,7 @@ async def predict_video(file: UploadFile = File(...)):
 
 @app.get("/")
 def read_root():
-    return {"status": "AuditMind API is running"}
+    # This tells FastAPI to serve your frontend UI when someone visits the site
+    if os.path.exists("index.html"):
+        return FileResponse("index.html")
+    return {"error": "UI not found. Ensure index.html is in the root directory."}
